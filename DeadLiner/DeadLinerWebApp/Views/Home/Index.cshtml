@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+   @foreach(var user in ViewBag.Users)
+    {
+       <p>@user.FullName</p>
+    }
+</div>

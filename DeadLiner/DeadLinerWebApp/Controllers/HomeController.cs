@@ -1,12 +1,8 @@
 ﻿using DeadLinerWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using DeadLinerWebApp.DAL.Context;
+using DeadLinerWebApp.DAL.Domain;
 
 namespace DeadLinerWebApp.Controllers
 {

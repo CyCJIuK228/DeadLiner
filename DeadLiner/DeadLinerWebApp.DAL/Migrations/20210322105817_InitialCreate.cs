@@ -40,7 +40,8 @@ namespace DeadLinerWebApp.DAL.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -96,11 +97,11 @@ namespace DeadLinerWebApp.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "Email", "FullName" },
+                columns: new[] { "UserId", "Email", "FullName", "Password" },
                 values: new object[,]
                 {
-                    { 1, "testEmail@lnu.edu.ua", "TestFullName1" },
-                    { 2, "Serhii.Yurko@lnu.edu.ua", "Serhii Yurko" }
+                    { 1, "testEmail@lnu.edu.ua", "TestFullName1", "test" },
+                    { 2, "Serhii.Yurko@lnu.edu.ua", "Serhii Yurko", "serhii" }
                 });
 
             migrationBuilder.InsertData(

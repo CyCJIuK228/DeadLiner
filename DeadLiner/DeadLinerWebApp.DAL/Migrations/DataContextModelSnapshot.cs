@@ -84,6 +84,9 @@ namespace DeadLinerWebApp.DAL.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
@@ -93,13 +96,15 @@ namespace DeadLinerWebApp.DAL.Migrations
                         {
                             UserId = 1,
                             Email = "testEmail@lnu.edu.ua",
-                            FullName = "TestFullName1"
+                            FullName = "TestFullName1",
+                            Password = "test"
                         },
                         new
                         {
                             UserId = 2,
                             Email = "Serhii.Yurko@lnu.edu.ua",
-                            FullName = "Serhii Yurko"
+                            FullName = "Serhii Yurko",
+                            Password = "serhii"
                         });
                 });
 

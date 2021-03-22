@@ -9,5 +9,6 @@ namespace DeadLinerWebApp.DAL.Models
         public string Code { get; set; }
         public List<User> Users { get; set; }
         public List<UsersHubs> UsersHubs { get; set; }
+        public List<Invites> Invites { get; set; } 
     }
 }

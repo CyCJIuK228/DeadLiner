@@ -16,8 +16,8 @@ namespace DeadLinerWebApp.DAL.Helper
 
             var userList = new List<User>
             {
-                new User {UserId = 1, FullName = "TestFullName1", Email = "testEmail@lnu.edu.ua"},
-                new User {UserId = 2, FullName = "Serhii Yurko", Email = "Serhii.Yurko@lnu.edu.ua"}
+                new User {UserId = 1, FullName = "TestFullName1", Email = "testEmail@lnu.edu.ua", Password = "test"},
+                new User {UserId = 2, FullName = "Serhii Yurko", Email = "Serhii.Yurko@lnu.edu.ua", Password = "serhii"}
             };
 
             var hubList = new List<Hub>

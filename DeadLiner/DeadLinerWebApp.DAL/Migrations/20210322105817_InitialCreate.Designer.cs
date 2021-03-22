@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeadLinerWebApp.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210317204950_InitialCreate")]
+    [Migration("20210322105817_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,6 +86,9 @@ namespace DeadLinerWebApp.DAL.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
@@ -95,13 +98,15 @@ namespace DeadLinerWebApp.DAL.Migrations
                         {
                             UserId = 1,
                             Email = "testEmail@lnu.edu.ua",
-                            FullName = "TestFullName1"
+                            FullName = "TestFullName1",
+                            Password = "test"
                         },
                         new
                         {
                             UserId = 2,
                             Email = "Serhii.Yurko@lnu.edu.ua",
-                            FullName = "Serhii Yurko"
+                            FullName = "Serhii Yurko",
+                            Password = "serhii"
                         });
                 });
 

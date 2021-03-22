@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -12,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DeadLinerWebApp.BLL\DeadLinerWebApp.BLL.csproj" />
     <ProjectReference Include="..\DeadLinerWebApp.DAL\DeadLinerWebApp.DAL.csproj" />
+    <ProjectReference Include="..\DeadLinerWebApp.PL\DeadLinerWebApp.PL.csproj" />
   </ItemGroup>
 
 </Project>

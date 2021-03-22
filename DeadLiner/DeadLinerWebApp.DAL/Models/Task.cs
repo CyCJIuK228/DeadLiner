@@ -8,8 +8,7 @@ namespace DeadLinerWebApp.DAL.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Resources { get; set; }
+        public List<UsersTasks> UsersTasks{ get; set; }
         public List<User> Users { get; set; }
-        public List<UsersTasks> UsersTasks { get; set; }   
-
     }
 }

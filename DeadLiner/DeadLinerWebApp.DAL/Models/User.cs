@@ -10,5 +10,8 @@ namespace DeadLinerWebApp.DAL.Models
         public string Password { get; set; }
         public List<Hub> Hubs { get; set; }
         public List<UsersHubs> UsersHubs { get; set; }
+        public List<Invites> Invites { get; set; }
+        public List<Task> Tasks { get; set; }
+        public List<UsersTasks> UsersTasks { get; set; }
     }
 }

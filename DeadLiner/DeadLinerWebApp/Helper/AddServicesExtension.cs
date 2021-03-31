@@ -10,8 +10,9 @@ namespace DeadLinerWebApp.Helper
     {
         public static void AddServices(this IServiceCollection services)
         {
-            services.AddTransient<IAuthorization, Authorization>();
+            services.AddTransient<IAuthorizationService, AuthorizationService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IHubService, HubService>();
         }
     }
 }

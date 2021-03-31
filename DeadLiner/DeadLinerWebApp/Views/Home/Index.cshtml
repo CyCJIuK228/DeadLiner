@@ -1,2 +1,26 @@
-﻿<a asp-controller="Account" asp-action="Logout">Log out</a>
-<p>@ViewBag.User</p>
+﻿@model DeadLinerWebApp.PL.Models.HubsViewModel
+
+@section css {
+    <link href="@Url.Content("~/css/home.css")" rel="stylesheet" />
+}
+
+<a asp-controller="Account" asp-action="Logout">Log out</a>
+
+<div class="container hubs">
+    <div class="row">
+        @foreach (var hub in Model.Hubs)
+        {
+            <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">@hub.Title</h2>
+                        <p class="card-text">@hub.Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary btn-sm">More Info</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

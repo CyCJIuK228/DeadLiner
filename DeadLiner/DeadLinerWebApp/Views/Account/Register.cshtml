@@ -1,0 +1,39 @@
+﻿@model DeadLinerWebApp.PL.Models.RegisterViewModel
+
+@section css {
+    <link href="@Url.Content("~/css/register.css")" rel="stylesheet" />
+}
+
+<div class="signup-form">
+    <form asp-controller="Account" asp-action="Register" method="post">
+        <h2>Register</h2>
+        <p class="hint-text">Create your account. It's free and only takes a minute.</p>
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xl-6"><input asp-for="FirstName" type="text" class="form-control" placeholder="First Name" required="required"></div>
+                <div class="col-xl-6"><input asp-for="LastName" type="text" class="form-control" placeholder="Last Name" required="required"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input asp-for="Email" type="email" class="form-control" placeholder="Email">
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password">
+            <span asp-validation-for="ConfirmPassword"></span>
+        </div>
+        <div class="form-group">
+            <label class="checkbox-inline"><input asp-for="IsAcceptedTerms" type="checkbox"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+            <span asp-validation-for="IsAcceptedTerms"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+        </div>
+    </form>
+    <div class="text-center">Already have an account? <a asp-controller="Account" asp-action="Login">Sign in</a></div>
+</div>

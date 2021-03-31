@@ -1,3 +1,4 @@
+using System;
 using DeadLinerWebApp.BLL.Helper;
 using DeadLinerWebApp.DAL.Domain;
 using DeadLinerWebApp.Helper;
@@ -25,8 +26,11 @@ namespace DeadLinerWebApp
         {
             services.AddControllersWithViews();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => 
+                .AddCookie(options =>
                 {
+                    options.Cookie.Name = "AuthCookie";
+                    options.SlidingExpiration = true;
+                    options.ExpireTimeSpan = TimeSpan.FromHours(1);
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
             services.AddDbContext<DataContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Connection")));

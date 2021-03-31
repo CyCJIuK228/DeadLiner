@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DeadLinerWebApp.BLL.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 namespace DeadLinerWebApp.Controllers
@@ -6,15 +7,17 @@ namespace DeadLinerWebApp.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-
-        public HomeController()
+        private readonly IHubService _hubService;
+        public HomeController(IHubService hubService)
         {
+            _hubService = hubService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            ViewBag.User = User.Identity.Name;
-            return View();
+            var model = _hubService.GetHubs();
+            return View(model);
         }
     }
 }

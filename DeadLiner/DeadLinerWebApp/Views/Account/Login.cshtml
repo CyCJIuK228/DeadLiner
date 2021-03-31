@@ -1,55 +1,29 @@
-﻿@model DeadLinerWebApp.PL.Models.LoginModel
+﻿@model DeadLinerWebApp.PL.Models.LoginViewModel
 
 @section css {
     <link href="@Url.Content("~/css/login.css")" rel="stylesheet" />
 }
 
-<div class="vertical-center">
-    <div class="container ">
-        <div class="d-flex justify-content-center h-100">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Sign In</h3>
-                    <div class="d-flex justify-content-end social_icon">
-                        <span><i class="fab fa-facebook-square"></i></span>
-                        <span><i class="fab fa-google-plus-square"></i></span>
-                        <span><i class="fab fa-instagram-square"></i></span>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="validation" asp-validation-summary="ModelOnly"></div>
-                    <form asp-controller="Account" asp-action="Login" asp-antiforgery="true">
-                        <div class="input-group form-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            </div>
-                            <input asp-for="Email" type="text" class="form-control" placeholder="email">
-                            <span asp-validation-for="Email"></span>
-                        </div>
-                        <div class="input-group form-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input asp-for="Password" type="password" class="form-control" placeholder="password">
-                            <span asp-validation-for="Password"></span>
-                        </div>
-                        <div class="row align-items-center remember">
-                            <input type="checkbox">Remember Me
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Login" class="btn float-right login_btn">
-                        </div>
-                    </form>
-                </div>
-                <div class="card-footer">
-                    <div class="d-flex justify-content-center links">
-                        Don't have an account?<a href="#">Sign Up</a>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <a href="#">Forgot your password?</a>
-                    </div>
-                </div>
-            </div>
+<div class="login-form">
+    <form asp-controller="Account" asp-action="Login" method="post">
+        <h2 class="text-center">Log in</h2>
+        @*Change validation notification if user doesn't exist*@
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <input asp-for="Email" type="email" class="form-control" placeholder="Email">
+            <span asp-validation-for="Email"></span>
         </div>
-    </div>
+        <div class="form-group">
+            <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
+        </div>
+        <div class="clearfix">
+            <label class="float-left"><input asp-for="IsRemember" type="checkbox"> Remember me</label>
+            <a href="#" class="float-right">Forgot Password?</a>
+        </div>
+    </form>
+    <p class="text-center"><a asp-controller="Account" asp-action="Register">Create an Account</a></p>
 </div>

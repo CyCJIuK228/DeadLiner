@@ -22,7 +22,8 @@ namespace DeadLinerWebApp.DAL.Helper
 
             var hubList = new List<Hub>
             {
-                new Hub {HubId = 1, Code = "testCodeHub", Name = "testNameHub"}
+                new Hub {HubId = 1, Code = "testCodeHub1", Name = "testNameHub1", Description = "testHubDescription1"},
+                new Hub {HubId = 2, Code = "testCodeHub2", Name = "testNameHub2", Description = "testHubDescription2"}
             };
 
             var usersHubs = new List<UsersHubs>

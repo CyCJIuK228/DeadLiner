@@ -10,5 +10,6 @@ namespace DeadLinerWebApp.DAL.Models
         public string Resources { get; set; }
         public List<UsersTasks> UsersTasks{ get; set; }
         public List<User> Users { get; set; }
+        public TasksHubs TasksHubs { get; set; }
     }
 }

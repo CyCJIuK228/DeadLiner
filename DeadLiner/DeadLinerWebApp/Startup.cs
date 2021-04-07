@@ -63,7 +63,7 @@ namespace DeadLinerWebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=StartPage}/{action=Index}/{id?}");
             });
         }
     }

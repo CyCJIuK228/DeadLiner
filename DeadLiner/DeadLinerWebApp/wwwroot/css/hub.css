@@ -1,0 +1,31 @@
+﻿body {
+    background: #63738a;
+    font-family: 'Roboto', sans-serif;
+}
+
+.main-container { /*width: 65%;*/
+    background: white;
+    overflow-x: auto;
+}
+
+.table-responsive {
+    max-height: 500px;
+}
+
+table {
+    width: 100%;
+}
+
+.main-data {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.tasks {
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.div-block {
+    margin-left: 2%;
+}

@@ -38,13 +38,20 @@ namespace DeadLinerWebApp.DAL.Helper
                 new Task {TaskId = 2, Name = "TODO Home page", Description = "Make a good visual concept", Resources = "https://www.w3schools.com"}
             };
 
+            var taskHubs = new List<TasksHubs>
+            {
+                new TasksHubs {TasksHubsId = 1, HubId = 1},
+                new TasksHubs {TasksHubsId = 2, HubId = 2}
+            };
 
 
+            modelBuilder.Entity<TasksHubs>().HasMany(t => t.Tasks).WithOne(c => c.TasksHubs);
             modelBuilder.Entity<Role>().HasData(roleList);
             modelBuilder.Entity<User>().HasData(userList);
             modelBuilder.Entity<Hub>().HasData(hubList);
             modelBuilder.Entity<UsersHubs>().HasData(usersHubs);
             modelBuilder.Entity<Task>().HasData(TaskList);
+            modelBuilder.Entity<TasksHubs>().HasData(taskHubs);
         }
 
         public static void ConfigureData(this ModelBuilder modelBuilder)

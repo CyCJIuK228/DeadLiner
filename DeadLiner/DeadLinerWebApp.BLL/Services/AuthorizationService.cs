@@ -26,11 +26,11 @@ namespace DeadLinerWebApp.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        private async Task Authenticate(HttpContext context, string email, bool isRemember)
+        private async Task Authenticate(HttpContext context, string fullName, bool isRemember)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, email)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, fullName)
             };
 
             var id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
@@ -53,7 +53,7 @@ namespace DeadLinerWebApp.BLL.Services
             if (userModel == null)
                 return null;
 
-            await Authenticate(context, model.Email, model.IsRemember);
+            await Authenticate(context, userModel.FullName, model.IsRemember);
             return _mapper.Map<CurrentUserViewModel>(userModel);
 
         }

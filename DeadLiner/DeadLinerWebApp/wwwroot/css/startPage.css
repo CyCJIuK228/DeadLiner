@@ -2,11 +2,12 @@
     padding: 20%;
     padding-top: 10%;
     padding-bottom: 5%;
+    margin-top: -5%
 }
 
 .description {
     color: #848484;
-    margin-top: 15%;
+    margin-top: 5%;
     padding: 5%;
     background: #f2f3f7;
     color: black;
@@ -27,7 +28,7 @@ h3 {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    width: 35%;
     border-radius: 50%;
 }
 
@@ -35,10 +36,6 @@ h3 {
     border-radius: 3px;
     font-size: 16px;
     font-weight: bold;
-}
-
-.main {
-    margin-top: 5%;
 }
 
 .main h1:before, .main h1:after {

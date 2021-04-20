@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DeadLinerWebApp.DAL.Models
+namespace DeadLinerWebApp.DAL.Entity
 {
     public class Hub
     {
@@ -9,7 +9,8 @@ namespace DeadLinerWebApp.DAL.Models
         public string Description { get; set; }
         public string Code { get; set; }
         public List<User> Users { get; set; }
+        public List<Task> Tasks { get; set; }
         public List<UsersHubs> UsersHubs { get; set; }
-        public List<Invites> Invites { get; set; } 
+        public List<Invites> Invites { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace DeadLinerWebApp.DAL.Models
+﻿namespace DeadLinerWebApp.DAL.Entity
 {
     public class UsersHubs
     {

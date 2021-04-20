@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DeadLinerWebApp.BLL.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DeadLinerWebApp.Controllers
 {
     public class HubController : Controller
     {
-        public IActionResult Index()
+        private readonly IHubService _hubService;
+
+        public HubController(IHubService service)
         {
-            return View();
+            _hubService = service;
+        }
+
+        public IActionResult Index(string title)
+        {
+            var tasks =_hubService.GetTasks(title, User.Identity.Name);
+            return View(tasks);
         }
     }
 }

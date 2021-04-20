@@ -1,31 +1,45 @@
-﻿body {
-    background: #63738a;
-    font-family: 'Roboto', sans-serif;
+﻿.thumb-sm {
+    height: 36px;
+    width: 36px;
 }
 
-.main-container { /*width: 65%;*/
-    background: white;
-    overflow-x: auto;
+.author {
+    font-style: italic;
 }
 
-.table-responsive {
-    max-height: 500px;
-}
-
-table {
-    width: 100%;
-}
-
-.main-data {
-    overflow-x: auto;
-    width: 100%;
-}
-
-.tasks {
-    max-height: 500px;
+.card-box {
+    padding: 20px;
     border-radius: 3px;
+    margin-bottom: 30px;
+    background-color: #fff;
 }
 
-.div-block {
-    margin-left: 2%;
+taskList {
+    min-height: 40px;
+    margin-bottom: 0
+}
+
+.taskList li {
+    background-color: #fff;
+    border: 1px solid rgba(121, 121, 121, .2);
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 3px
+}
+
+.taskList li:last-of-type {
+    margin-bottom: 0
+}
+
+.taskList a {
+    font-size: 13px
+}
+
+.taskList .checkbox {
+    margin-left: 20px;
+    margin-top: 5px
+}
+
+.text-muted {
+    color: #98a6ad !important;
 }

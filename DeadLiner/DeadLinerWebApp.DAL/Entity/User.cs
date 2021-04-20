@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DeadLinerWebApp.DAL.Models
+namespace DeadLinerWebApp.DAL.Entity
 {
     public class User
     {
@@ -8,6 +8,7 @@ namespace DeadLinerWebApp.DAL.Models
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public List<RecoveryCode> Code { get; set; }
         public List<Hub> Hubs { get; set; }
         public List<UsersHubs> UsersHubs { get; set; }
         public List<Invites> Invites { get; set; }

@@ -5,12 +5,15 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using DeadLinerWebApp.BLL.Interfaces;
+using DeadLinerWebApp.DAL.Entity;
 using DeadLinerWebApp.DAL.Interfaces;
-using DeadLinerWebApp.DAL.Models;
 using DeadLinerWebApp.PL.Models;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using MimeKit;
 using Task = System.Threading.Tasks.Task;
 
 namespace DeadLinerWebApp.BLL.Services
@@ -26,11 +29,11 @@ namespace DeadLinerWebApp.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        private async Task Authenticate(HttpContext context, string email, bool isRemember)
+        private async Task Authenticate(HttpContext context, string fullName, bool isRemember)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, email)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, fullName)
             };
 
             var id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
@@ -53,9 +56,60 @@ namespace DeadLinerWebApp.BLL.Services
             if (userModel == null)
                 return null;
 
-            await Authenticate(context, model.Email, model.IsRemember);
+            await Authenticate(context, userModel.FullName, model.IsRemember);
             return _mapper.Map<CurrentUserViewModel>(userModel);
 
+        }
+
+        public void ForgotPassword(ForgotPasswordViewModel model)
+        {
+            var user = _unitOfWork.Users.Find(u => u.Email.ToLowerInvariant().Equals(model.Email.ToLowerInvariant()))
+                .FirstOrDefault();
+
+            if (user == null)
+                //TODO
+                throw new Exception();
+
+            var message = new MimeMessage();
+            var from = new MailboxAddress("Deadliner",
+                "support_team@deadliner.com");
+
+            var to = new MailboxAddress(model.Email, user.Email);
+
+            message.To.Add(to);
+            message.From.Add(@from);
+            message.Subject = "Recovery password deadliner app.";
+            var generator = new Random();
+            var random = generator.Next(0, 1000000).ToString("D6");
+            var bodyBuilder = new BodyBuilder { HtmlBody = $"<h1>Please, enter this recovery code in the message box: {random}</h1>", TextBody = "Recovery code" };
+            message.Body = bodyBuilder.ToMessageBody();
+            var client = new SmtpClient();
+            client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+            client.Authenticate("ivanbogov678@gmail.com", "123bigay456");
+            client.Send(message);
+            client.Disconnect(true);
+            client.Dispose();
+
+            _unitOfWork.Codes.Create(new RecoveryCode { Code = random, UserId = user.UserId});
+            _unitOfWork.Save();
+        }
+
+        public void ReplacePassword(RecoveryPasswordViewModel model)
+        {
+            var user = _unitOfWork.Users.Find(u => u.Email.ToLowerInvariant().Equals(model.Email)).FirstOrDefault();
+
+            if (user != null)
+            {
+                user.Password = model.NewPassword;
+                _unitOfWork.Users.Update(user);
+            }
+
+            _unitOfWork.Save();
+        }
+
+        public string GetRecoveryCode(string email)
+        {
+            return _unitOfWork.Codes.GetWithInclude(u => u.User, p => p.User).Last().Code;
         }
 
         public async void Logout(HttpContext context)

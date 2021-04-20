@@ -1,6 +1,6 @@
-using DeadLinerWebApp.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using DeadLinerWebApp.DAL.Entity;
 
 namespace DeadLinerWebApp.DAL.Helper
 {
@@ -32,19 +32,31 @@ namespace DeadLinerWebApp.DAL.Helper
                 new UsersHubs {UsersHubsId = 2, HubId = 1, RoleId = 1, UserId = 2, TeamName = "testTeam1"}
             };
 
-            var TaskList = new List<Task>
+            var taskList = new List<Task>
             {
-                new Task {TaskId = 1, Name = "TODO Index page", Description = "Make a good visual concept", Resources = "https://www.w3schools.com"},
-                new Task {TaskId = 2, Name = "TODO Home page", Description = "Make a good visual concept", Resources = "https://www.w3schools.com"}
+                new Task {TaskId = 1, Name = "TODO Index page", Description = "Make a good visual concept", Resources = "https://www.w3schools.com", HubId = 1},
+                new Task {TaskId = 2, Name = "TODO Home page", Description = "Make a good visual concept", Resources = "https://www.w3schools.com", HubId = 1}
             };
 
+            var codes = new List<RecoveryCode>
+            {
+                new RecoveryCode {RecoveryCodeId = 1, Code = "test", UserId = 1}
+            };
 
+            var usersTasks = new List<UsersTasks>
+            {
+                new UsersTasks {UsersTasksId = 1, TaskId = 1, TaskStatus = TaskStatus.New, UserId = 1},
+                new UsersTasks {UsersTasksId = 1, TaskId = 2, TaskStatus = TaskStatus.InProgress, UserId = 1},
+            };
 
             modelBuilder.Entity<Role>().HasData(roleList);
             modelBuilder.Entity<User>().HasData(userList);
             modelBuilder.Entity<Hub>().HasData(hubList);
             modelBuilder.Entity<UsersHubs>().HasData(usersHubs);
-            modelBuilder.Entity<Task>().HasData(TaskList);
+            modelBuilder.Entity<Task>().HasData(taskList);
+            modelBuilder.Entity<RecoveryCode>().HasData(codes);
+            modelBuilder.Entity<UsersTasks>().HasData(usersTasks);
+            modelBuilder.Entity<UsersTasks>().Property(p => p.TaskStatus).HasConversion<string>();
         }
 
         public static void ConfigureData(this ModelBuilder modelBuilder)
@@ -77,7 +89,7 @@ namespace DeadLinerWebApp.DAL.Helper
                        .HasForeignKey(k => k.TaskId),
                    j =>
                    {
-                       j.HasKey(t => new { t.UserId, t.TaskId });
+                       j.HasKey(t => new { t.UserId, t.TaskId, t.TaskStatus });
                    }
                );
         }

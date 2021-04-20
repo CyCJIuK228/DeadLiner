@@ -7,7 +7,10 @@ namespace DeadLinerWebApp.BLL.Interfaces
     public interface IAuthorizationService
     {
         Task<CurrentUserViewModel> Login(LoginViewModel model, HttpContext context);
-        void Logout(HttpContext context);
         CurrentUserViewModel Register(RegisterViewModel model);
+        void ForgotPassword(ForgotPasswordViewModel model);
+        void ReplacePassword(RecoveryPasswordViewModel model);
+        string GetRecoveryCode(string email);
+        void Logout(HttpContext context);
     }
 }

@@ -1,10 +1,9 @@
-﻿@model DeadLinerWebApp.PL.Models.HubsViewModel
+﻿@using DeadLinerWebApp.PL.Models
+@model DeadLinerWebApp.PL.Models.HubsViewModel
 
 @section css {
     <link href="@Url.Content("~/css/home.css")" rel="stylesheet" />
 }
-
-<a asp-controller="Account" asp-action="Logout">Log out</a>
 
 <div class="container hubs">
     <div class="row">
@@ -17,10 +16,12 @@
                         <p class="card-text">@hub.Description</p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-primary btn-sm">More Info</a>
+                        <a asp-controller="Hub" asp-action="Index" asp-route-title="@hub.Title" class="btn btn-primary btn-sm">More Info</a>
                     </div>
                 </div>
             </div>
         }
+        
+        @await Html.PartialAsync("CreateHub", new HubModel())
     </div>
 </div>

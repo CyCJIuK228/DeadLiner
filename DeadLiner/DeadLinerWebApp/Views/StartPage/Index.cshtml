@@ -1,0 +1,31 @@
+﻿@section css {
+    <link href="@Url.Content("~/css/startPage.css")" rel="stylesheet" />
+}
+
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-8 offset-sm-2 text-left "> 
+        <div>
+          <img src="~/images/logo.jpg" class="img-fluid center" alt="Responsive image">
+      </div>
+      <div class="main">
+        <h1 class="text-center">DeadLiner</h1>
+      </div>
+      <div class="description text-center">
+      <h3>  DeadLiner is a powerful web-app that helps users to manage projects and deadlines. It's based on Hub-system which allows to create a private group for your project</h3>
+      <hr class="solid">
+      <div class="outer">
+        <h3>Now you can:</h3>
+        <h4>Create Hubs</h4>
+        <h4>Invite users to Hubs</h4>
+        <h4>Set tasks and deadlines</h4>
+        <h4>Create teams inside the Hub</h4>
+        <h4>Divide users into mentor and mentee roles</h4>
+      </div>
+      </div>
+      <div>
+          <a class="btn btn-primary btn-lg btn-block" asp-controller="Home" asp-action="Index">Get Started</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Text;
+using System.Threading.Tasks;
 using DeadLinerWebApp.BLL.Interfaces;
 using DeadLinerWebApp.PL.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeadLinerWebApp.Controllers
@@ -16,7 +19,7 @@ namespace DeadLinerWebApp.Controllers
 
         [HttpGet]
         public IActionResult Login()
-        { 
+        {
             return View();
         }
 
@@ -60,6 +63,71 @@ namespace DeadLinerWebApp.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _authorizationService.ForgotPassword(model);
+                    HttpContext.Session.Set("email", Encoding.ASCII.GetBytes(model.Email));
+                    return RedirectToAction("EnterCode");
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "A user with such credentials doesn't exist.");
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult EnterCode()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult EnterCode(CodeViewModel model)
+        {
+            if (ModelState.IsValid &&
+                model.ActualCode.Equals(_authorizationService.GetRecoveryCode(Encoding.ASCII.GetString(HttpContext.Session.Get("email")))))
+            {
+                return View("RecoverPassword");
+            }
+
+            ModelState.AddModelError("", "Incorrect code inputted.");
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult RecoverPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RecoverPassword(RecoveryPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Email = Encoding.ASCII.GetString(HttpContext.Session.Get("email"));
+                _authorizationService.ReplacePassword(model);
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(model);
+        }
+
 
 
         [HttpGet]

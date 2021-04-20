@@ -15,3 +15,34 @@
 .card-text {
     color: #212529;
 }
+
+.circle {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    background-color: #007bff;
+}
+
+.circle::before {
+    content: "+";
+    height: 110%;
+    font-size: 150px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-family: courier;
+    color: white;
+}
+
+381
+
+.modal {
+    text-align: center;
+}
+
+.modal-dialog {
+    margin-top: 15%;
+    vertical-align: middle;
+}

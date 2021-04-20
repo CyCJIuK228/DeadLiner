@@ -35,6 +35,8 @@ namespace DeadLinerWebApp
                 });
             services.AddDbContext<DataContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Connection")));
             services.AddAutoMapper(cfg => cfg.AddProfile(typeof(MappingProfile)));
+            services.AddDistributedMemoryCache();
+            services.AddSession();
             services.AddServices();
         }
 
@@ -51,6 +53,7 @@ namespace DeadLinerWebApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -63,7 +66,7 @@ namespace DeadLinerWebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=StartPage}/{action=Index}/{id?}");
             });
         }
     }

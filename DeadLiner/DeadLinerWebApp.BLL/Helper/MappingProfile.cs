@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DeadLinerWebApp.DAL.Models;
+using DeadLinerWebApp.DAL.Entity;
 using DeadLinerWebApp.PL.Models;
 
 namespace DeadLinerWebApp.BLL.Helper

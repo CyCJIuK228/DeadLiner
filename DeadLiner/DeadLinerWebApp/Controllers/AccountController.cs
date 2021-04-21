@@ -102,7 +102,7 @@ namespace DeadLinerWebApp.Controllers
             if (ModelState.IsValid &&
                 model.ActualCode.Equals(_authorizationService.GetRecoveryCode(Encoding.ASCII.GetString(HttpContext.Session.Get("email")))))
             {
-                return View("RecoverPassword");
+                return RedirectToAction("RecoverPassword");
             }
 
             ModelState.AddModelError("", "Incorrect code inputted.");

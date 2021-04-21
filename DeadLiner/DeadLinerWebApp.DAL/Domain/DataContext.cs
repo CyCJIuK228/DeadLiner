@@ -25,7 +25,6 @@ namespace DeadLinerWebApp.DAL.Domain
         public DbSet<Task> Tasks { get; set; }
         public DbSet<UsersHubs> UsersHubs { get; set; }
         public DbSet<UsersTasks> UsersTasks { get; set; }
-        public DbSet<Invites> Invites { get; set; }
         public DbSet<RecoveryCode> RecoveryCodes { get; set; }
 
 

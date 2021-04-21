@@ -68,15 +68,24 @@ namespace DeadLinerWebApp.BLL.Services
             var code = new string(Enumerable.Repeat(chars, 4)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
 
-            var user = _unitOfWork.Users.Find(p => p.FullName.Equals(userName)).First();
-            var mentorRole = _unitOfWork.Roles.Find(r => r.Title.Equals("mentor")).First();
-
             _unitOfWork.Hubs.Create(new Hub
             {
                 Description = description,
                 Name = title,
-                Code = code,
-                Users = new List<User> { user }
+                Code = code
+            });
+
+            _unitOfWork.Save();
+            var user = _unitOfWork.Users.Find(p => p.FullName.Equals(userName)).First();
+            var mentorRole = _unitOfWork.Roles.Find(r => r.Title.Equals("mentor")).First();
+            var hub = _unitOfWork.Hubs.Find(s => s.Name == title).FirstOrDefault();
+
+            _unitOfWork.UsersHubs.Create(new UsersHubs
+            {
+                HubId = hub.HubId,
+                RoleId = mentorRole.RoleId,
+                TeamName = "test",
+                UserId = user.UserId
             });
 
             _unitOfWork.Save();

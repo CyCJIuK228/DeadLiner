@@ -71,16 +71,6 @@ namespace DeadLinerWebApp.DAL.Helper
                         j.HasKey(t => new { t.UserId, t.HubId });
                     }
                 );
-            modelBuilder.Entity<Hub>().HasMany(c => c.Users).WithMany(s => s.Hubs)
-               .UsingEntity<Invites>(
-                   j => j.HasOne(pt => pt.User).WithMany(t => t.Invites).HasForeignKey(k => k.UserId),
-                   j => j.HasOne(t => t.Hub).WithMany(t => t.Invites)
-                       .HasForeignKey(k => k.HubId),
-                   j =>
-                   {
-                       j.HasKey(t => new { t.UserId, t.HubId, t.Status });
-                   }
-               );
 
             modelBuilder.Entity<Task>().HasMany(c => c.Users).WithMany(s => s.Tasks)
                .UsingEntity<UsersTasks>(

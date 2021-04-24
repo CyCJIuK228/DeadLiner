@@ -5,23 +5,47 @@
     <link href="@Url.Content("~/css/home.css")" rel="stylesheet" />
 }
 
-<div class="container hubs">
-    <div class="row">
-        @foreach (var hub in Model.Hubs)
-        {
-            <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h2 class="card-title">@hub.Title</h2>
-                        <p class="card-text">@hub.Description</p>
-                    </div>
-                    <div class="card-footer">
-                        <a asp-controller="Hub" asp-action="Index" asp-route-title="@hub.Title" class="btn btn-primary btn-sm">More Info</a>
-                    </div>
+<div class="container row hubs">
+    @foreach (var hub in Model.Hubs)
+    {
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">@hub.Title</h2>
+                    <p class="card-text">@hub.Description</p>
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Hub" asp-action="Index" asp-route-title="@hub.Title" class="btn btn-primary btn-sm">More Info</a>
                 </div>
             </div>
-        }
-        
-        @await Html.PartialAsync("CreateHub", new HubModel())
-    </div>
+
+            @if (hub.IsMentor)
+            {
+                <a class="btn btn-danger btn-circle" data-toggle="modal" data-target="#deleteHub">
+                    <i class="fa fa-times"></i>
+                </a>
+                <div class="modal" id="deleteHub" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                Are you sure you want to delete the hub?
+                            </div>
+                            <div>
+                                <form asp-controller="Home" asp-action="DeleteHub" asp-route-title="@hub.Title">
+                                    <button type="submit"class="btn btn-primary float-left" style="width: 50%">
+                                        Yes
+                                    </button>
+                                </form>
+                                <button class="btn btn-secondary float-right" style="width: 50%" data-dismiss="modal">
+                                    No
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    @await Html.PartialAsync("CreateHub", new HubModel())
 </div>

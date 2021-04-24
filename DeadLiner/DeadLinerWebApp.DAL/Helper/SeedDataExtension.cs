@@ -52,6 +52,7 @@ namespace DeadLinerWebApp.DAL.Helper
             modelBuilder.Entity<Role>().HasData(roleList);
             modelBuilder.Entity<User>().HasData(userList);
             modelBuilder.Entity<Hub>().HasData(hubList);
+            modelBuilder.Entity<Hub>().HasIndex(p => p.Name).IsUnique();
             modelBuilder.Entity<UsersHubs>().HasData(usersHubs);
             modelBuilder.Entity<Task>().HasData(taskList);
             modelBuilder.Entity<RecoveryCode>().HasData(codes);

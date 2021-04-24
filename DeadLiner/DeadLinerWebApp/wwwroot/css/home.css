@@ -36,8 +36,6 @@
     color: white;
 }
 
-381
-
 .modal {
     text-align: center;
 }
@@ -45,4 +43,28 @@
 .modal-dialog {
     margin-top: 15%;
     vertical-align: middle;
+}
+
+.btn-circle {
+    display: block;
+    position: absolute;
+    top: -1vh;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    padding: 6px 0px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+
+.fa {
+    margin-top: 0.5vh;
+    color: #fff
+}
+
+.modal-header {
+    justify-content: center;
+    font-weight: bold
 }

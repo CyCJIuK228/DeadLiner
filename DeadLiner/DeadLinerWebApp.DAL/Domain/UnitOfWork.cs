@@ -13,6 +13,7 @@ namespace DeadLinerWebApp.DAL.Domain
         private Repository<RecoveryCode> _recoveryCodeRepository;
         private Repository<UsersTasks> _usersTasksRepository;
         private Repository<Role> _rolesRepository;
+        private Repository<UserInfo> _userInfoRepository;
 
         public UnitOfWork(DataContext context)
         {
@@ -25,6 +26,7 @@ namespace DeadLinerWebApp.DAL.Domain
         public IRepository<RecoveryCode> Codes => _recoveryCodeRepository ??= new Repository<RecoveryCode>(_dbContext);
         public IRepository<UsersTasks> UsersTasks => _usersTasksRepository ??= new Repository<UsersTasks>(_dbContext);
         public IRepository<Role> Roles => _rolesRepository ??= new Repository<Role>(_dbContext);
+        public IRepository<UserInfo> UserInfos => _userInfoRepository ??= new Repository<UserInfo>(_dbContext);
 
         public void Save()
         {

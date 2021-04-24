@@ -23,7 +23,7 @@ namespace DeadLinerWebApp.BLL.Services
         public HubsViewModel GetHubs(string userName)
         {
             var hubs = _unitOfWork.UsersHubs
-                .GetWithInclude(p => p.User.FullName.Equals(userName), i => i.User, i => i.Hub).Select(i => i.Hub);
+                .GetWithInclude(p => p.User.FullName.Equals(userName), i => i.Role, i => i.Hub);
             var hubsList = _mapper.Map<List<HubModel>>(hubs.ToList());
             return new HubsViewModel { Hubs = hubsList };
         }
@@ -88,6 +88,13 @@ namespace DeadLinerWebApp.BLL.Services
                 UserId = user.UserId
             });
 
+            _unitOfWork.Save();
+        }
+
+        public void DeleteHub(string title)
+        {
+            var hub = _unitOfWork.Hubs.Find(p => p.Name.Equals(title)).First();
+            _unitOfWork.Hubs.Delete(hub.HubId);
             _unitOfWork.Save();
         }
     }

@@ -12,7 +12,6 @@
 <div class="login-form">
     <form asp-controller="Account" asp-action="EnterCode" method="post">
         <h2 class="text-center">Enter code</h2>
-        <div class="validation" asp-validation-summary="ModelOnly"></div>
         <div class="form-group">
             <input asp-for="ActualCode" type ="number" class="form-control" placeholder="Code">
             <span asp-validation-for="ActualCode"></span>

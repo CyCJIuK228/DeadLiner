@@ -43,3 +43,9 @@ taskList {
 .text-muted {
     color: #98a6ad !important;
 }
+
+.clost-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+}

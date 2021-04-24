@@ -1,217 +1,180 @@
-﻿@section css {
-    <link href="@Url.Content("~/css/profile.css")" rel="stylesheet" />   
+﻿@model DeadLinerWebApp.PL.Models.UserInfoViewModel
+
+@section css {
+    <link href="@Url.Content("~/css/profile.css")" rel="stylesheet" />
 }
 
 <div class="container light-style flex-grow-1 mt-3">
-
-    <div class="card overflow-hidden mainblock">
-        <div class="row no-gutters row-bordered row-border-light">
-            <div class="col-md-3 pt-0">
-                <div class="list-group list-group-flush account-settings-links">
-                    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change password</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-social-links">Social links</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications">Notifications</a>
+    <form asp-controller="Home" asp-action="Profile" method="post">
+        <div class="card overflow-hidden mainblock">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change password</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-notifications">Notifications</a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-9">
-                <div class="tab-content">
-                    <div class="tab-pane fade active show" id="account-general">
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <hr class="border-light m-0">
 
-                        <div class="card-body media align-items-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="d-block ui-w-80 avatar">
-                            <div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label class="form-label">E-mail</label>
+                                    <input asp-for="Email" type="text" class="form-control mb-1" placeholder="yourmail@mail.com">
 
-                            </div>
-                            <div class="media-body ml-4">
-                                <label class="btn btn-outline-primary">
-                                    Upload new photo
-                                    <input type="file" class="account-settings-fileinput">
-                                </label> &nbsp;
-                                <button type="button" class="btn btn-default md-btn-flat">Reset current photo</button>
-
-                                <div class="text-light small mt-1">Allowed JPG and PNG. Max size of 4Mb</div>
-                            </div>
-                        </div>
-                        <hr class="border-light m-0">
-
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Fullname</label>
-                                <input type="text" class="form-control" value="YourName YourSurname">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">E-mail</label>
-                                <input type="text" class="form-control mb-1" value="yourmail@mail.com">
-
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">University</label>
-                                <input type="text" class="form-control" value="LNU">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Group</label>
-                                <input type="text" class="form-control" value="AMI32">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="tab-pane fade" id="account-change-password">
-                        <div class="card-body pb-2">
-
-                            <div class="form-group">
-                                <label class="form-label">Current password</label>
-                                <input type="password" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">New password</label>
-                                <input type="password" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Repeat new password</label>
-                                <input type="password" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">University</label>
+                                    <input asp-for="University" type="text" class="form-control" placeholder="University...">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Group</label>
+                                    <input asp-for="Group" type="text" class="form-control" placeholder="Group...">
+                                </div>
                             </div>
 
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="account-info">
-                        <div class="card-body pb-2">
+                        <div class="tab-pane fade" id="account-change-password">
+                            <div class="card-body pb-2">
 
-                            <div class="form-group">
-                                <label class="form-label">Bio</label>
-                                <textarea class="form-control" rows="5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc arcu, dignissim sit amet sollicitudin iaculis, vehicula id urna. Sed luctus urna nunc. Donec fermentum, magna sit amet rutrum pretium, turpis dolor molestie diam, ut lacinia diam risus eleifend sapien. Curabitur ac nibh nulla. Maecenas nec augue placerat, viverra tellus non, pulvinar risus.</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Birthday</label>
-                                <input type="text" class="form-control" value="May 3, 1995">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Country</label>
-                                <input type="text" class="form-control" value="Ukraine">
-                            </div>
+                                <div class="form-group">
+                                    <label class="form-label">Current password</label>
+                                    <input asp-for="CurrentPassword" type="password" class="form-control">
+                                </div>
 
+                                <div class="form-group">
+                                    <label class="form-label">New password</label>
+                                    <input asp-for="NewPassword" type="password" class="form-control">
+                                </div>
 
+                                <div class="form-group">
+                                    <label class="form-label">Repeat new password</label>
+                                    <input asp-for="ConfirmPassword" type="password" class="form-control">
+                                </div>
+                                <a asp-controller="Account" asp-action="ForgotPassword" class="float-right forgot-password">Forgot Password?</a>
+
+                            </div>
                         </div>
+                        <div class="tab-pane fade" id="account-info">
+                            <div class="card-body pb-2">
 
-                        <div class="card-body pb-2">
+                                <div class="form-group">
+                                    <label class="form-label">Bio</label>
+                                    <textarea asp-for="Bio" class="form-control" rows="5" placeholder="Your biography here.."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Birthday</label>
+                                    @if (@Model.BirthDay.Year != 2021)
+                                    {
+                                        <input asp-for="BirthDay" type="month" min="1900-01" class="form-control" placeholder="Your birthday...">
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="BirthDay" type="month" min="1900-01" value="2021-04" class="form-control" placeholder="Your birthday...">
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Country</label>
+                                    <input asp-for="Country" type="text" class="form-control" placeholder="Your country..">
+                                </div>
 
-                            <h6 class="mb-4">Contacts</h6>
-                            <div class="form-group">
-                                <label class="form-label">Phone</label>
-                                <input type="text" class="form-control" value="+0 (123) 456 7891">
+
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Addres</label>
-                                <input type="text" class="form-control" value="">
+
+                            <div class="card-body pb-2">
+
+                                <h6 class="mb-4">Contacts</h6>
+                                <div class="form-group">
+                                    <label class="form-label">Phone</label>
+                                    <input asp-for="Phone" type="text" class="form-control" placeholder="+0 (123) 456 7891">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Address</label>
+                                    <input asp-for="Address" type="text" class="form-control" placeholder="Your address...">
+                                </div>
+
                             </div>
 
                         </div>
 
-                    </div>
-                    <div class="tab-pane fade" id="account-social-links">
-                        <div class="card-body pb-2">
+                        <div class="tab-pane fade" id="account-notifications">
+                            <div class="card-body pb-2">
 
-                            <div class="form-group">
-                                <label class="form-label">Twitter</label>
-                                <input type="text" class="form-control" value="https://twitter.com/user">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Facebook</label>
-                                <input type="text" class="form-control" value="https://www.facebook.com/user">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Google+</label>
-                                <input type="text" class="form-control" value="">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">LinkedIn</label>
-                                <input type="text" class="form-control" value="">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Instagram</label>
-                                <input type="text" class="form-control" value="https://www.instagram.com/user">
-                            </div>
+                                <h6 class="mb-4">Activity</h6>
 
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="account-notifications">
-                        <div class="card-body pb-2">
-
-                            <h6 class="mb-4">Activity</h6>
-
-                            <div class="form-group">
-                                <label class="switcher">
-                                    <input type="checkbox" class="switcher-input" checked="">
-                                    <span class="switcher-indicator">
-                                        <span class="switcher-yes"></span>
-                                        <span class="switcher-no"></span>
-                                    </span>
-                                    <span class="switcher-label">Email me when someone assigns task to me</span>
-                                </label>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" checked="">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Email me when someone assigns task to me</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" checked="">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Email me when my task reviewed</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Email me when someone invites me to Hub</span>
+                                    </label>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="switcher">
-                                    <input type="checkbox" class="switcher-input" checked="">
-                                    <span class="switcher-indicator">
-                                        <span class="switcher-yes"></span>
-                                        <span class="switcher-no"></span>
-                                    </span>
-                                    <span class="switcher-label">Email me when my task reviewed</span>
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label class="switcher">
-                                    <input type="checkbox" class="switcher-input">
-                                    <span class="switcher-indicator">
-                                        <span class="switcher-yes"></span>
-                                        <span class="switcher-no"></span>
-                                    </span>
-                                    <span class="switcher-label">Email me when someone invites me to Hub</span>
-                                </label>
-                            </div>
-                        </div>
-                        <hr class="border-light m-0">
-                        <div class="card-body pb-2">
+                            <hr class="border-light m-0">
+                            <div class="card-body pb-2">
 
-                            <h6 class="mb-4">Application</h6>
+                                <h6 class="mb-4">Application</h6>
 
-                            <div class="form-group">
-                                <label class="switcher">
-                                    <input type="checkbox" class="switcher-input" checked="">
-                                    <span class="switcher-indicator">
-                                        <span class="switcher-yes"></span>
-                                        <span class="switcher-no"></span>
-                                    </span>
-                                    <span class="switcher-label">News and announcements</span>
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label class="switcher">
-                                    <input type="checkbox" class="switcher-input">
-                                    <span class="switcher-indicator">
-                                        <span class="switcher-yes"></span>
-                                        <span class="switcher-no"></span>
-                                    </span>
-                                    <span class="switcher-label">Updates</span>
-                                </label>
-                            </div>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input" checked="">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">News and announcements</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="switcher">
+                                        <input type="checkbox" class="switcher-input">
+                                        <span class="switcher-indicator">
+                                            <span class="switcher-yes"></span>
+                                            <span class="switcher-no"></span>
+                                        </span>
+                                        <span class="switcher-label">Updates</span>
+                                    </label>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="text-right mt-3 d-flex justify-content-end ">
-        <button type="button" class="btn btn-primary">Save changes</button>&nbsp;
-        <button type="button" class="btn btn-danger">Cancel</button>
-    </div>
-
+        <div class="text-right mt-3 d-flex justify-content-end ">
+            <button type="submit" class="btn btn-primary">Save changes</button>&nbsp;
+            <a href="/Home">
+                <input type="button" asp-controller = "Home" asp-action ="Index" value ="Cancel" class="btn btn-danger">
+            </a>
+        </div>
+    </form>
 </div>
-
-  </div>

@@ -13,6 +13,7 @@ namespace DeadLinerWebApp.Helper
             services.AddTransient<IAuthorizationService, AuthorizationService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IHubService, HubService>();
+            services.AddTransient<IProfileService, ProfileService>();
         }
     }
 }

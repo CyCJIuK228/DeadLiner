@@ -5,16 +5,19 @@ using DeadLinerWebApp.BLL.Interfaces;
 using DeadLinerWebApp.PL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 
 namespace DeadLinerWebApp.Controllers
 {
     public class AccountController : Controller
     {
         private readonly IAuthorizationService _authorizationService;
+        private readonly IToastNotification _toastNotification;
 
-        public AccountController(IAuthorizationService authorizationService)
+        public AccountController(IAuthorizationService authorizationService, IToastNotification toast)
         {
             _authorizationService = authorizationService;
+            _toastNotification = toast;
         }
 
         [HttpGet]
@@ -35,7 +38,7 @@ namespace DeadLinerWebApp.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError("", "A user with such credentials doesn't exist.");
+                _toastNotification.AddErrorToastMessage("A user with such credentials doesn't exist.");
             }
 
             return View(model);
@@ -55,10 +58,11 @@ namespace DeadLinerWebApp.Controllers
                 var user = _authorizationService.Register(model);
                 if (user != null)
                 {
+                    _toastNotification.AddSuccessToastMessage("User has been successfully registered.");
                     return RedirectToAction("Login");
                 }
 
-                ModelState.AddModelError("", "A user with such credentials exist.");
+                _toastNotification.AddErrorToastMessage("A user with such credentials exist.");
             }
 
             return View(model);
@@ -83,7 +87,7 @@ namespace DeadLinerWebApp.Controllers
                 }
                 catch (Exception)
                 {
-                    ModelState.AddModelError("", "A user with such credentials doesn't exist.");
+                    _toastNotification.AddErrorToastMessage("A user with such credentials doesn't exist.");
                 }
             }
 
@@ -105,7 +109,7 @@ namespace DeadLinerWebApp.Controllers
                 return RedirectToAction("RecoverPassword");
             }
 
-            ModelState.AddModelError("", "Incorrect code inputted.");
+            _toastNotification.AddErrorToastMessage("Incorrect code inputted.");
             return View(model);
         }
 
@@ -122,6 +126,7 @@ namespace DeadLinerWebApp.Controllers
             {
                 model.Email = Encoding.ASCII.GetString(HttpContext.Session.Get("email"));
                 _authorizationService.ReplacePassword(model);
+                _toastNotification.AddSuccessToastMessage("Password has been successfully changed.");
                 return RedirectToAction("Login", "Account");
             }
 

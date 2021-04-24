@@ -120,7 +120,7 @@ namespace DeadLinerWebApp.BLL.Services
         public CurrentUserViewModel Register(RegisterViewModel model)
         {
             var userModel = _unitOfWork.Users
-                .Find(u => u.Email.Equals(model.Email) && u.Password.Equals(model.Password)).FirstOrDefault();
+                .Find(u => u.FullName == model.FirstName + ' ' + model.LastName).FirstOrDefault();
 
             if (userModel != null)
                 return null;

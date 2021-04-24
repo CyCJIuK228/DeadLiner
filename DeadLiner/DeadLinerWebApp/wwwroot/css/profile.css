@@ -31,7 +31,10 @@ label.btn {
     color: #babbbc !important;
 }
 
-
+.forgot-password {
+    color: rgba(0, 0, 0, .5);
+    text-decoration: underline;
+}
 
 .card {
     background-clip: padding-box;

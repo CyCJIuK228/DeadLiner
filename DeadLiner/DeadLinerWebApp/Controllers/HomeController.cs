@@ -1,7 +1,9 @@
-﻿using DeadLinerWebApp.BLL.Interfaces;
+﻿using System;
+using DeadLinerWebApp.BLL.Interfaces;
 using DeadLinerWebApp.PL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using NToastNotify;
 
 namespace DeadLinerWebApp.Controllers
 {
@@ -9,9 +11,14 @@ namespace DeadLinerWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly IHubService _hubService;
-        public HomeController(IHubService hubService)
+        private readonly IToastNotification _toastNotification;
+        private readonly IProfileService _profileService;
+
+        public HomeController(IHubService hubService, IProfileService profileService, IToastNotification toast)
         {
             _hubService = hubService;
+            _profileService = profileService;
+            _toastNotification = toast;
         }
 
         [HttpGet]
@@ -30,14 +37,51 @@ namespace DeadLinerWebApp.Controllers
         [HttpPost]
         public IActionResult AddHub(HubModel model)
         {
-            _hubService.CreateHub(model.Title, model.Description, User.Identity.Name);
+            try
+            {
+                _hubService.CreateHub(model.Title, model.Description, User.Identity.Name);
+                _toastNotification.AddSuccessToastMessage("Hub has successfully created.");
+            }
+            catch (Exception e)
+            {
+                _toastNotification.AddErrorToastMessage("Hub with such a name already exists.");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteHub(string title)
+        {
+            _hubService.DeleteHub(title);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Profile()
         {
-            return View();
+            var model = _profileService.GetUserInfo(User.Identity.Name);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Profile(UserInfoViewModel user)
+        {
+            bool IsSuccessful = true;
+            try
+            {
+                _profileService.UpdateUserInfo(user, User.Identity.Name);
+            }
+            catch (Exception e)
+            {
+                _toastNotification.AddErrorToastMessage(e.Message);
+                IsSuccessful = false;
+            }
+
+            if(IsSuccessful)
+                _toastNotification.AddSuccessToastMessage("Profile has been successfully updated.");
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -10,6 +10,7 @@ namespace DeadLinerWebApp.DAL.Interfaces
         IRepository<RecoveryCode> Codes { get; }
         IRepository<UsersTasks> UsersTasks { get; }
         IRepository<Role> Roles { get; }
+        IRepository<UserInfo> UserInfos { get; }
 
         void Save();
     }

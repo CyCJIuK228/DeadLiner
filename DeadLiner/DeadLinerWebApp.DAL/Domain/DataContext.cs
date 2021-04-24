@@ -26,7 +26,7 @@ namespace DeadLinerWebApp.DAL.Domain
         public DbSet<UsersHubs> UsersHubs { get; set; }
         public DbSet<UsersTasks> UsersTasks { get; set; }
         public DbSet<RecoveryCode> RecoveryCodes { get; set; }
-
+        public DbSet<UserInfo> UserInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

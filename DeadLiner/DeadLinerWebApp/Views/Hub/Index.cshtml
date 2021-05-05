@@ -5,100 +5,223 @@
     <link href="@Url.Content("~/css/hub.css")" rel="stylesheet" />
 }
 
-@*TODO
-    Add mentor name and check if it's mentor*@
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            var trigger = $('.hamburger'),
+                overlay = $('.overlay'),
+                isClosed = false;
 
-<div class="content mt-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="card-box">
-                    <h4 class="text-dark">New</h4>
-                    @foreach (var task in Model.Assignments.Where(i => i.Status == AssignmentStatus.New))
-                    {
-                        <ul class="taskList list-unstyled" id="upcoming">
-                            <li>
-                                <div class="checkbox float-right">
-                                    <input type="checkbox" aria-label="Single checkbox Two">
-                                    <label></label>
-                                </div>
-                                <span class="text-muted">@task.Title</span>
-                                <div class="clearfix"></div>
-                                <div class="mt-3">
-                                    <p class="float-right mb-0">
-                                        <button type="button" class="btn btn-primary btn-sm">View</button>
-                                    </p>
-                                    <p class="mb-0">
-                                        <a href="" class="text-muted author">
-                                            <span>@task.UserName</span>
-                                        </a>
-                                    </p>
-                                </div>
-                            </li>
-                        </ul>
-                    }
-                    <a href="#" class="btn btn-block mt-3">
-                        <i class="fa fa-plus-circle"></i>
-                        Add New
+            trigger.click(function () {
+                hamburger_cross();
+            });
+
+            function hamburger_cross() {
+
+                if (isClosed == true) {
+                    overlay.hide();
+                    trigger.removeClass('is-open');
+                    trigger.addClass('is-closed');
+                    isClosed = false;
+                } else {
+                    overlay.show();
+                    trigger.removeClass('is-closed');
+                    trigger.addClass('is-open');
+                    isClosed = true;
+                }
+            }
+
+            $('[data-toggle="offcanvas"]').click(function () {
+                $('#wrapper').toggleClass('toggled');
+            });
+        });
+    </script>
+}
+
+<div id="wrapper">
+    <div class="overlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="nav flex-column text-white w-100">
+            <li>
+                <i class="far fa-user text-dark ml-2" style="font-size:30px"></i>
+                <span>
+                    <a class="nav-link h3 my-2 text-dark" style="display: inline-block">
+                        Users
                     </a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card-box">
-                    <h4 class="text-dark ">In Progress</h4>
-                    @foreach (var task in Model.Assignments.Where(i => i.Status == AssignmentStatus.InProgress))
+                </span>
+            </li>
+
+            @foreach (var user in Model.UsersName)
+            {
+                <li href="#" class="nav-link">
+                    @if (user == Model.MentorName)
                     {
-                        <ul class="taskList list-unstyled" id="inprogress">
-                            <li>
-                                <div class="checkbox float-right">
-                                    <input type="checkbox" aria-label="Single checkbox Two">
-                                    <label></label>
-                                </div>
-                                <span class="text-muted">@task.Title</span>
-                                <div class="clearfix"></div>
-                                <div class="mt-3">
-                                    <p class="float-right mb-0">
-                                        <button type="button" class="btn btn-primary btn-sm">View</button>
-                                    </p>
-                                    <p class="mb-0">
-                                        <a href="" class="text-muted author">
-                                            <span>@task.UserName</span>
-                                        </a>
-                                    </p>
-                                </div>
-                            </li>
-                        </ul>
+                        <span href="" class="mx-2 text-secondary"><b>@user</b></span>
                     }
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card-box">
-                    <h4 class="text-dark ">Closed</h4>
-                    @foreach (var task in Model.Assignments.Where(i => i.Status == AssignmentStatus.Closed))
+                    else
                     {
-                        <ul class="taskList list-unstyled" id="completed">
-                            <li>
-                                <div class="checkbox float-right">
-                                    <input type="checkbox" aria-label="Single checkbox Two">
-                                    <label></label>
-                                </div>
-                                <span class="text-muted">@task.Title</span>
-                                <div class="clearfix"></div>
-                                <div class="mt-3">
-                                    <p class="float-right mb-0">
-                                        <button type="button" class="btn btn-primary btn-sm">View</button>
-                                    </p>
-                                    <p class="mb-0">
-                                        <a href="" class="text-muted author">
-                                            <span>@task.UserName</span>
-                                        </a>
-                                    </p>
-                                </div>
-                            </li>
-                        </ul>
+                        <span href="" class="mx-2 text-secondary">@user</span>
                     }
+                </li>
+            }
+
+            <li><hr class="solid text-dark"></li>
+
+            @if (Model.Role == "mentor")
+            {
+                <li>
+                    <i class="fas fa-paper-plane ml-2 text-dark" style="font-size: 30px"></i>
+                    <span>
+                        <a class="nav-link h3 my-2 text-dark" style="display: inline-block">
+                            Invites
+                        </a>
+                    </span>
+                </li>
+
+                @foreach (var invite in Model.Invites)
+                {
+                    <li href="#" class="nav-link">
+                        <a class="user-link"><span href="" class="mx-2 text-secondary">@invite</span></a>
+                    </li>
+                }
+                <li>
+                    <hr class="solid">
+                    <a type="button" asp-controller="Hub" asp-action="InviteUser" asp-route-title="@Context.Request.Query["title"]" class="btn btn-dark ml-2">Invite User</a>
+                </li>
+            }
+        </ul>
+    </nav>
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+        </button>
+        <div class="content mt-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card-box">
+                            <h4 class="text-dark">New</h4>
+
+                            @foreach (var task in Model.Assignments.Where(i => i.Status == AssignmentStatus.New))
+                            {
+                                <ul class="taskList list-unstyled" id="upcoming">
+                                    <li>
+                                        @if (task.UserName.Equals(User.Identity.Name) || Model.Role == "mentor")
+                                        {
+                                            <div class="checkbox float-right dropdown">
+                                                <select class="form-control" style="height: 30%">
+                                                    <option selected value="New">New</option>
+                                                    <option value="InProgress">InProgress</option>
+                                                    <option value="Closed">Closed</option>
+                                                </select>
+                                            </div>
+                                        }
+                                        <span class="text-muted">@task.Title</span>
+                                        <div class="mt-3">
+                                            <p class="float-right mb-0">
+                                                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewTask">
+                                                    View
+                                                </a>
+                                                @await Html.PartialAsync("ViewTask", new TaskViewModel() { Description = task.Description, TaskName = task.Title, References = task.References })
+                                            </p>
+                                            <p class="mb-0">
+                                                <a href="" class="text-muted author">
+                                                    <span>@task.UserName</span>
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            }
+                            @if (Model.Role == "mentor")
+                            {
+                                <a href="#" class="btn btn-block mt-3" data-toggle="modal" data-target="#addTask">
+                                    <i class="fa fa-plus-circle"></i>
+                                    Add New
+                                </a>
+                                @await Html.PartialAsync("AddTask", new TaskViewModel { UsersName = Model.UsersName })
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card-box">
+                            <h4 class="text-dark ">In Progress</h4>
+                            @foreach (var task in Model.Assignments.Where(i => i.Status == AssignmentStatus.InProgress))
+                            {
+                                <ul class="taskList list-unstyled" id="inprogress">
+                                    <li>
+                                        @if (task.UserName.Equals(User.Identity.Name) || Model.Role == "mentor")
+                                        {
+                                            <div class="checkbox float-right dropdown">
+                                                <select class="form-control" style="height: 30%">
+                                                    <option value="New">New</option>
+                                                    <option selected value="InProgress">InProgress</option>
+                                                    <option value="Closed">Closed</option>
+                                                </select>
+                                            </div>
+                                        }
+                                        <span class="text-muted">@task.Title</span>
+
+                                        <div class="mt-3">
+                                            <p class="float-right mb-0">
+                                                <button type="button" class="btn btn-primary btn-sm">View</button>
+                                            </p>
+                                            <p class="mb-0">
+                                                <a href="" class="text-muted author">
+                                                    <span>@task.UserName</span>
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card-box">
+                            <h4 class="text-dark ">Closed</h4>
+                            @foreach (var task in Model.Assignments.Where(i => i.Status == AssignmentStatus.Closed))
+                            {
+                                <ul class="taskList list-unstyled" id="completed">
+                                    <li>
+                                        @if (task.UserName.Equals(User.Identity.Name) || Model.Role == "mentor")
+                                        {
+                                            <div class="checkbox float-right dropdown">
+                                                <select class="form-control" style="height: 30%">
+                                                    <option value="New">New</option>
+                                                    <option value="InProgress">InProgress</option>
+                                                    <option selected value="Closed">Closed</option>
+                                                </select>
+                                            </div>
+                                        }
+                                        <span class="text-muted">@task.Title</span>
+                                        <div class="mt-3">
+                                            <p class="float-right mb-0">
+                                                <button type="button" class="btn btn-primary btn-sm">View</button>
+                                            </p>
+                                            <p class="mb-0">
+                                                <a href="" class="text-muted author">
+                                                    <span>@task.UserName</span>
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- /#page-content-wrapper -->
+
 </div>
+<!-- /#wrapper -->

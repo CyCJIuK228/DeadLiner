@@ -5,7 +5,7 @@
     <link href="@Url.Content("~/css/home.css")" rel="stylesheet" />
 }
 
-<div class="container row hubs">
+<div class="container row hubs float-left">
     @foreach (var hub in Model.Hubs)
     {
         <div class="col-md-4 mb-5">
@@ -32,7 +32,7 @@
                             </div>
                             <div>
                                 <form asp-controller="Home" asp-action="DeleteHub" asp-route-title="@hub.Title">
-                                    <button type="submit"class="btn btn-primary float-left" style="width: 50%">
+                                    <button type="submit" class="btn btn-primary float-left" style="width: 50%">
                                         Yes
                                     </button>
                                 </form>
@@ -48,4 +48,21 @@
     }
 
     @await Html.PartialAsync("CreateHub", new HubModel())
+
+    @foreach (var hub in Model.HubsInvited)
+    {
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">@hub.Title</h2>
+                    <p class="card-text">@hub.Description</p>
+                </div>
+                <div class="card-footer">
+                    <p>Do you want to join this Hub?</p>
+                    <a asp-controller="Home" asp-action="AcceptJoin" asp-route-title ="@hub.Title" class="btn btn-success float-left">Yes</a>
+                    <a asp-controller="Home" asp-action="RejectJoin" asp-route-title ="@hub.Title" class="btn btn-danger float-right">No</a>
+                </div>
+            </div>
+        </div>
+    }
 </div>

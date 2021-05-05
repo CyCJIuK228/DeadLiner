@@ -7,6 +7,8 @@ namespace DeadLinerWebApp.PL.Models
         public string Role { get; set; }
         public string MentorName { get; set; }
         public List<Assignment> Assignments { get; set; }
+        public List<string> UsersName { get; set; }
+        public List<string> Invites { get; set; }
     }
 
     public class Assignment
@@ -14,6 +16,7 @@ namespace DeadLinerWebApp.PL.Models
         public string Title { get; set; }
         public string UserName { get; set; }
         public string Description { get; set; }
+        public string References { get; set; }
         public AssignmentStatus Status { get; set; }
     }
 

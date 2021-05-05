@@ -11,7 +11,8 @@ namespace DeadLinerWebApp.DAL.Interfaces
         IRepository<UsersTasks> UsersTasks { get; }
         IRepository<Role> Roles { get; }
         IRepository<UserInfo> UserInfos { get; }
-
+        IRepository<Task> Tasks { get; }
+        IRepository<Invite> Invites { get; }
         void Save();
     }
 }

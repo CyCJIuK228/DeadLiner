@@ -14,6 +14,8 @@ namespace DeadLinerWebApp.DAL.Domain
         private Repository<UsersTasks> _usersTasksRepository;
         private Repository<Role> _rolesRepository;
         private Repository<UserInfo> _userInfoRepository;
+        private Repository<Task> _taskRepository;
+        private Repository<Invite> _inviteRepository;
 
         public UnitOfWork(DataContext context)
         {
@@ -27,6 +29,8 @@ namespace DeadLinerWebApp.DAL.Domain
         public IRepository<UsersTasks> UsersTasks => _usersTasksRepository ??= new Repository<UsersTasks>(_dbContext);
         public IRepository<Role> Roles => _rolesRepository ??= new Repository<Role>(_dbContext);
         public IRepository<UserInfo> UserInfos => _userInfoRepository ??= new Repository<UserInfo>(_dbContext);
+        public IRepository<Task> Tasks => _taskRepository ??= new Repository<Task>(_dbContext);
+        public IRepository<Invite> Invites => _inviteRepository ??= new Repository<Invite>(_dbContext);
 
         public void Save()
         {

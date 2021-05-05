@@ -14,5 +14,6 @@ namespace DeadLinerWebApp.DAL.Entity
         public List<Task> Tasks { get; set; }
         public List<UsersTasks> UsersTasks { get; set; }
         public UserInfo UserInfo { get; set; }
+        public List<Invite> Invites { get; set; }
     }
 }

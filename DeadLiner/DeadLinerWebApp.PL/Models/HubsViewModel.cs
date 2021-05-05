@@ -5,6 +5,7 @@ namespace DeadLinerWebApp.PL.Models
     public class HubsViewModel
     {
         public List<HubModel> Hubs { get; set; }
+        public List<HubModel> HubsInvited { get; set; }
     }
 
     public class HubModel

@@ -1,0 +1,4 @@
+﻿.open > .dropdown-menu {
+    display: block !important;
+    padding: .5rem 0 !important;
+}

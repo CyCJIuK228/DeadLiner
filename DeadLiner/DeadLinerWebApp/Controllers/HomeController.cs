@@ -83,5 +83,20 @@ namespace DeadLinerWebApp.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult AcceptJoin(string title)
+        {
+            _hubService.AcceptJoinToHub(User.Identity.Name, title);
+            _toastNotification.AddInfoToastMessage($"Congrats! Now you are a member of {title} hub!");
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult RejectJoin(string title)
+        {
+            _hubService.RejectJoinToHub(User.Identity.Name, title);
+            return RedirectToAction("Index");
+        }
     }
 }

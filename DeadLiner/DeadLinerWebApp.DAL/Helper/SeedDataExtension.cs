@@ -49,6 +49,11 @@ namespace DeadLinerWebApp.DAL.Helper
                 new UsersTasks {UsersTasksId = 1, TaskId = 2, TaskStatus = TaskStatus.InProgress, UserId = 1},
             };
 
+            var invites = new List<Invite>
+            {
+                new Invite {InviteId = 1, HubId = 1, Status = "new", UserId = 1}
+            };
+
             modelBuilder.Entity<Role>().HasData(roleList);
             modelBuilder.Entity<User>().HasData(userList);
             modelBuilder.Entity<Hub>().HasData(hubList);
@@ -58,6 +63,7 @@ namespace DeadLinerWebApp.DAL.Helper
             modelBuilder.Entity<RecoveryCode>().HasData(codes);
             modelBuilder.Entity<UsersTasks>().HasData(usersTasks);
             modelBuilder.Entity<UsersTasks>().Property(p => p.TaskStatus).HasConversion<string>();
+            modelBuilder.Entity<Invite>().HasData(invites);
         }
 
         public static void ConfigureData(this ModelBuilder modelBuilder)

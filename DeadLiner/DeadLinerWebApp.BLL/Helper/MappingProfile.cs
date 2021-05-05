@@ -17,6 +17,7 @@ namespace DeadLinerWebApp.BLL.Helper
             CreateMap<UserInfo, UserInfoViewModel>()
                 .ForMember(d => d.Email, m => m.MapFrom(v => v.User.Email));
             CreateMap<User, UserInfoViewModel>();
+            CreateMap<Hub, HubModel>().ForMember(d => d.Title, m => m.MapFrom(v => v.Name));
         }
     }
 }

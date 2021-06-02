@@ -86,7 +86,7 @@ namespace DeadLinerWebApp.DAL.Helper
                        .HasForeignKey(k => k.TaskId),
                    j =>
                    {
-                       j.HasKey(t => new { t.UserId, t.TaskId, t.TaskStatus });
+                       j.HasKey(t => new { t.UserId, t.TaskId });
                    }
                );
         }

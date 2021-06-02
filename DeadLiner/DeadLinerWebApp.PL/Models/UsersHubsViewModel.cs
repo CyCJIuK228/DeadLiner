@@ -4,6 +4,7 @@ namespace DeadLinerWebApp.PL.Models
 {
     public class UsersHubsViewModel
     {
+        public string HubName { get; set; }
         public string Role { get; set; }
         public string MentorName { get; set; }
         public List<Assignment> Assignments { get; set; }

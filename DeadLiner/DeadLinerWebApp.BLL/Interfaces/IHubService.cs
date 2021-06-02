@@ -17,5 +17,6 @@ namespace DeadLinerWebApp.BLL.Interfaces
         void InviteUser(InviteUserViewModel model);
         void AcceptJoinToHub(string name, string title);
         void RejectJoinToHub(string name, string title);
+        void UpdateTask(string title, string status);
     }
 }

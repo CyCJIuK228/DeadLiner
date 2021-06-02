@@ -29,7 +29,7 @@ namespace DeadLinerWebApp.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        private async Task Authenticate(HttpContext context, string fullName, bool isRemember)
+        private async Task Authenticate(HttpContext context, string fullName)
         {
             var claims = new List<Claim>
             {
@@ -42,7 +42,6 @@ namespace DeadLinerWebApp.BLL.Services
             await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id),
                 new AuthenticationProperties
                 {
-                    IsPersistent = isRemember,
                     ExpiresUtc = DateTime.Now.AddHours(1)
                 });
         }
@@ -56,7 +55,7 @@ namespace DeadLinerWebApp.BLL.Services
             if (userModel == null)
                 return null;
 
-            await Authenticate(context, userModel.FullName, model.IsRemember);
+            await Authenticate(context, userModel.FullName);
             return _mapper.Map<CurrentUserViewModel>(userModel);
 
         }

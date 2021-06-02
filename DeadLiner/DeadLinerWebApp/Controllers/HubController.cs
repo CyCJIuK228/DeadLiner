@@ -25,6 +25,7 @@ namespace DeadLinerWebApp.Controllers
             var tasks = _hubService.GetTasks(title, User.Identity.Name);
             tasks.UsersName = _hubService.GetUsersInHub(title);
             tasks.Invites = _hubService.GeInvitesInHub(title);
+            tasks.HubName = title;
             return View(tasks);
         }
 
@@ -82,9 +83,11 @@ namespace DeadLinerWebApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult UpdateTasks(UsersHubsViewModel hub)
+        public IActionResult UpdateTasks(string hub, string taskName, string status)
         {
-            return RedirectToAction("Index", "Hub");
+            status = "InProgress";
+            _hubService.UpdateTask(taskName, status);
+            return RedirectToAction("Index", "Hub", new { title =  hub});
         }
     }
 }

@@ -196,5 +196,13 @@ namespace DeadLinerWebApp.BLL.Services
             _unitOfWork.Invites.Update(invite);
             _unitOfWork.Save();
         }
+
+        public void UpdateTask(string title, string status)
+        {
+            var task = _unitOfWork.UsersTasks.GetWithInclude(p => p.Task.Name.Equals(title)).First();
+            task.TaskStatus = Enum.Parse<TaskStatus>(status);
+            _unitOfWork.UsersTasks.Update(task);
+            _unitOfWork.Save();
+        }
     }
 }

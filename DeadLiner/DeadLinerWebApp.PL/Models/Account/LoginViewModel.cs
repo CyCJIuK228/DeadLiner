@@ -14,7 +14,5 @@ namespace DeadLinerWebApp.PL.Models
         [DataType(DataType.Password)]
         [NotNull]
         public string Password { get; set; }
-
-        public bool IsRemember { get; set; }
     }
 }

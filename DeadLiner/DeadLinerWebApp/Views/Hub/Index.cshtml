@@ -115,11 +115,9 @@
                                     <li>
                                         @if (task.UserName.Equals(User.Identity.Name) || Model.Role == "mentor")
                                         {
+                                            <a asp-controller="Hub" asp-action="UpdateTasks" asp-route-hub="@Model.HubName" asp-route-taskName="@task.Title" asp-route-status="@task.Status"> <i class="fas fa-sync"></i></a>
                                             <div class="checkbox float-right dropdown">
-                                                <select class="form-control" style="height: 30%">
-                                                    <option selected value="New">New</option>
-                                                    <option value="InProgress">InProgress</option>
-                                                    <option value="Closed">Closed</option>
+                                                <select asp-for="@task.Status" asp-items="Html.GetEnumSelectList<AssignmentStatus>()" class="form-control" style="height: 30%">
                                                 </select>
                                             </div>
                                         }
@@ -159,6 +157,7 @@
                                     <li>
                                         @if (task.UserName.Equals(User.Identity.Name) || Model.Role == "mentor")
                                         {
+                                            <a asp-controller="Hub" asp-action="UpdateTasks" asp-route-hub="@Model.HubName" asp-route-taskName="@task.Title" asp-route-status="@task.Status"> <i class="fas fa-sync"></i></a>
                                             <div class="checkbox float-right dropdown">
                                                 <select class="form-control" style="height: 30%">
                                                     <option value="New">New</option>
@@ -193,6 +192,7 @@
                                     <li>
                                         @if (task.UserName.Equals(User.Identity.Name) || Model.Role == "mentor")
                                         {
+                                            <a asp-controller="Hub" asp-action="UpdateTasks" asp-route-hub="@Model.HubName" asp-route-taskName="@task.Title" asp-route-status="@task.Status"> <i class="fas fa-sync"></i></a>
                                             <div class="checkbox float-right dropdown">
                                                 <select class="form-control" style="height: 30%">
                                                     <option value="New">New</option>
